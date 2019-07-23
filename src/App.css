@@ -16,6 +16,7 @@
 }
 .App {
   background-color: lightblue;
+  height: webkit - fill - available;
 }
 body {
   font-family: "Roboto", sans-serif;
@@ -249,7 +250,6 @@ img {
   height: 250px;
   width: 800px;
   background-color: var(--dark-color);
-  
 }
 .alert {
   padding: 0.7rem;
@@ -370,7 +370,7 @@ table th {
   width: 100%;
   opacity: 0.9;
   margin-bottom: 1rem;
-  height:70px;
+  height: 70px;
 }
 
 .navbar ul {
