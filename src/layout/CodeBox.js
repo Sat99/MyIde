@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useContext } from "react";
 import ideContext from "../context/ideContext";
-import {UnControlled as CodeMirror} from 'react-codemirror2';
+import { UnControlled as CodeMirror } from "react-codemirror2";
 import axios from "axios";
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/yonce.css';
-import 'codemirror/addon/edit/closebrackets.js';
-require('codemirror/mode/clojure/clojure.js');
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/yonce.css";
+import "codemirror/addon/edit/closebrackets.js";
+require("codemirror/mode/clojure/clojure.js");
 
 //ceaf93f10f7330318aecc742f76bda4fae74b12e
 const CodeBox = () => {
@@ -17,7 +17,6 @@ const CodeBox = () => {
   const [lang, setLang] = useState("C++");
   const [lang_id, setLang_id] = useState(14);
   const submitCode = async text => {
-    
     console.log(lang);
     if (lang === "C++") {
       setLang_id(14);
@@ -26,9 +25,8 @@ const CodeBox = () => {
       setLang_id(34);
     }
     if (lang === "Java") {
-        setLang_id(27);
-      }
-      
+      setLang_id(27);
+    }
 
     console.log(lang_id);
     console.log(lang);
@@ -39,7 +37,7 @@ const CodeBox = () => {
     };
     axios
       .post("https://api.judge0.com/submissions", body)
-      .then(async(res) => {
+      .then(async res => {
         console.log(res.data.token);
         setToken(res.data.token);
         axios
@@ -51,7 +49,7 @@ const CodeBox = () => {
           .catch(error => {
             console.log(error.message);
           });
-        })
+      })
       .catch(error => {
         console.log(error.message);
       });
@@ -97,74 +95,121 @@ const CodeBox = () => {
     console.log(e.target.value);
     console.log(lang);
   };
-  const onClick1 = () => {setCode("");
-                        }
-  const onClick2 = () => {setInput("");
-                        }
-  const onClick3 = () => {setOutput("");
-                        }
+  const onClick1 = () => {
+    setCode("");
+  };
+  const onClick2 = () => {
+    setInput("");
+  };
+  const onClick3 = () => {
+    setOutput("");
+  };
   const onChange2 = e => setInput(e.target.value);
   return (
     <Fragment>
-        
-      <nav className="navbar bg-info text-white ">
+      <nav className="navbar bg-info text-white " style={{ height: "100%" }}>
         <ul>
           <li>
-            <button className="btn btn-warning m-1" data-toggle="popover" title="CLEAR CODE" onClick={onClick1} data-content="Don't forget to enter the input in the input box before pressing the run button">Clear Code</button>
-         </li>
-         <li>
-            <button className="btn btn-warning m-1" data-toggle="popover" title="CLEAR INPUT" onClick={onClick2} data-content="Don't forget to enter the input in the input box before pressing the run button">Clear Input</button>
-         </li>
-         <li>
-            <button className="btn btn-warning m-1" data-toggle="popover" title="CLEAR CODE" onClick={onClick3} data-content="Don't forget to enter the input in the input box before pressing the run button">Clear Output</button>
-         </li>
+            <button
+              className="btn btn-warning my-4"
+              data-toggle="popover"
+              title="CLEAR CODE"
+              style={{ height: "webkit - fill - available" }}
+              onClick={onClick1}
+              data-content="Don't forget to enter the input in the input box before pressing the run button"
+            >
+              Clear Code
+            </button>
+          </li>
           <li>
-          <div class="input-group m-1">
-          <div class="input-group-prepend">
-          <label className="input-group-text bg-secondary text-white" for="inputGroupSelect01">Language</label>
-          </div>
-          <select class="custom-select" id="inputGroupSelect01" value={lang} onChange={handleChange}>
-          <option value="C++">C++</option>
-          <option value="Python">Python</option>
-          <option value="Java">Java</option>
-          
-         </select>
-       </div>
-       </li>
-          
+            <button
+              className="btn btn-warning my-4"
+              data-toggle="popover"
+              title="CLEAR INPUT"
+              onClick={onClick2}
+              data-content="Don't forget to enter the input in the input box before pressing the run button"
+            >
+              Clear Input
+            </button>
+          </li>
+          <li>
+            <button
+              className="btn btn-warning my-4"
+              data-toggle="popover"
+              title="CLEAR CODE"
+              onClick={onClick3}
+              data-content="Don't forget to enter the input in the input box before pressing the run button"
+            >
+              Clear Output
+            </button>
+          </li>
+          <li>
+            <div class="input-group my-4">
+              <div class="input-group-prepend">
+                <label
+                  className="input-group-text bg-secondary text-white"
+                  for="inputGroupSelect01"
+                >
+                  Language
+                </label>
+              </div>
+              <select
+                class="custom-select"
+                id="inputGroupSelect01"
+                value={lang}
+                onChange={handleChange}
+              >
+                <option value="C++">C++</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+              </select>
+            </div>
+          </li>
         </ul>
       </nav>
       <form className="form" onSubmit={onSubmit1}>
-      <CodeMirror
+        <CodeMirror
           value={code}
           options={{
-            mode: 'clojure',
-            theme: 'yonce',
+            mode: "clojure",
+            theme: "yonce",
             lineNumbers: true,
-            autoCloseBrackets:true,
+            autoCloseBrackets: true
           }}
-          style={{width:"900px"}}
+          style={{ width: "900px" }}
           onChange={(editor, metadata, value) => {
-            setCode(value); 
+            setCode(value);
           }}
-          />        
-        <textarea
-          className="text1 m-4 text-warning"
-          
-          onChange={onChange2}
-          placeholder="Write the input here"
-          value={input}
         />
-        <input type="submit" value="Submit" className="btn btn-info btn-lg btn-block m-4" style={{width:"800px"}} />
+        <div className="container-fluid px-1">
+          <div className="row">
+            <div className="col-lg-12">
+              <textarea
+                className="text1 m-4 text-warning"
+                onChange={onChange2}
+                placeholder="Write the input here"
+                value={input}
+              />
+            </div>
+            <div className="col-lg-12">
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-info btn-lg btn-block m-4"
+                style={{ width: "800px" }}
+              />
+            </div>
+            <div className="col-lg-12">
+              <textarea
+                className="text1 m-4 text-warning"
+                placeholder="Output"
+                value={output}
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
       </form>
-
-      <textarea
-        className="text1 m-4 text-warning"
-        
-        placeholder="Output"
-        value={output}
-        readOnly
-      />
     </Fragment>
   );
 };
