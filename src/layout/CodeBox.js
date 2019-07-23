@@ -107,7 +107,7 @@ const CodeBox = () => {
   const onChange2 = e => setInput(e.target.value);
   return (
     <Fragment>
-      <nav className="navbar bg-info text-white " style={{ height: "100%" }}>
+      <nav className="navbar bg-info text-white m-0" style={{ height: "100%" }}>
         <ul>
           <li>
             <button
